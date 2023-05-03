@@ -1,8 +1,9 @@
 // React and react native imports
 import React, { Component } from 'react';
-import { Image, StyleSheet, ViewPropTypes } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 // Third party imports
 import Button from 'react-native-button';
@@ -66,12 +67,7 @@ class StarButton extends Component {
   }
 
   onButtonPress(event) {
-    const {
-      halfStarEnabled,
-      starSize,
-      rating,
-      onStarButtonPress,
-    } = this.props;
+    const { halfStarEnabled, starSize, rating, onStarButtonPress } = this.props;
 
     let addition = 0;
 
@@ -84,10 +80,7 @@ class StarButton extends Component {
   }
 
   iconSetFromProps() {
-    const {
-      icoMoonJson,
-      iconSet,
-    } = this.props;
+    const { icoMoonJson, iconSet } = this.props;
     if (icoMoonJson) {
       return createIconSetFromIcoMoon(icoMoonJson);
     }
@@ -96,21 +89,18 @@ class StarButton extends Component {
   }
 
   renderIcon() {
-    const {
-      reversed,
-      starColor,
-      starIconName,
-      starSize,
-      starStyle,
-    } = this.props;
+    const { reversed, starColor, starIconName, starSize, starStyle } =
+      this.props;
 
     const Icon = this.iconSetFromProps();
     let iconElement;
 
     const newStarStyle = {
-      transform: [{
-        scaleX: reversed ? -1 : 1,
-      }],
+      transform: [
+        {
+          scaleX: reversed ? -1 : 1,
+        },
+      ],
       ...StyleSheet.flatten(starStyle),
     };
 
@@ -130,28 +120,16 @@ class StarButton extends Component {
         resizeMode: 'contain',
       };
 
-      const iconStyles = [
-        imageStyle,
-        newStarStyle,
-      ];
+      const iconStyles = [imageStyle, newStarStyle];
 
-      iconElement = (
-        <Image
-          source={starIconName}
-          style={iconStyles}
-        />
-      );
+      iconElement = <Image source={starIconName} style={iconStyles} />;
     }
 
     return iconElement;
   }
 
   render() {
-    const {
-      activeOpacity,
-      buttonStyle,
-      disabled,
-    } = this.props;
+    const { activeOpacity, buttonStyle, disabled } = this.props;
 
     return (
       <Button

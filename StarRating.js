@@ -1,8 +1,9 @@
 // React and react native imports
 import React, { Component } from 'react';
-import { View, ViewPropTypes, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { View as AnimatableView } from 'react-native-animatable';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 // Local file imports
 import StarButton from './StarButton';
@@ -145,7 +146,9 @@ class StarRating extends Component {
       const starButtonElement = (
         <AnimatableView
           key={i}
-          ref={(node) => { this.starRef.push(node); }}
+          ref={(node) => {
+            this.starRef.push(node);
+          }}
         >
           <StarButton
             activeOpacity={activeOpacity}
@@ -157,7 +160,7 @@ class StarRating extends Component {
             onStarButtonPress={(event) => {
               if (animation && ANIMATION_TYPES.includes(animation)) {
                 for (let s = 0; s <= i; s++) {
-                  this.starRef[s][animation](1000 + (s * 200));
+                  this.starRef[s][animation](1000 + s * 200);
                 }
               }
               this.onStarButtonPress(event);
@@ -177,7 +180,10 @@ class StarRating extends Component {
     }
 
     return (
-      <View style={newContainerStyle} pointerEvents={disabled ? 'none' : 'auto'}>
+      <View
+        style={newContainerStyle}
+        pointerEvents={disabled ? 'none' : 'auto'}
+      >
         {starButtons}
       </View>
     );
